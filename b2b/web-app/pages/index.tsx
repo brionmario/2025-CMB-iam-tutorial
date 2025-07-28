@@ -36,6 +36,7 @@ export default function Home() {
 
     const router: NextRouter = useRouter();
     const [openSignUpModal, setOpenSignUpModal] = React.useState(false);
+    const [brandingPreference, setBrandingPreference] = React.useState(null);
 
     const [isSignUpButtonVisible, setIsSignUpButtonVisible] = React.useState(true);
 
@@ -61,6 +62,7 @@ export default function Home() {
             getPersonalization(getOrgIdFromUrl())
                 .then((response) => {
                     personalize(response.data);
+                    setBrandingPreference(response.data);
                 })
                 .catch(async (err) => {
                     if (err.response.status === 404) {
@@ -72,7 +74,9 @@ export default function Home() {
                             primaryColor: "#2D5DF3",
                             secondaryColor: "#aed3f6"
                         };
+                        
                         personalize(defaultPersonalization);
+                        setBrandingPreference(defaultPersonalization);
                     }
                 });
             setIsSignUpButtonVisible(false)
@@ -86,6 +90,7 @@ export default function Home() {
     return (
         <>
             <IndexHomeComponent
+                brandingPreference={brandingPreference}
                 tagText="Sign in to continue"
                 signinOnClick={ signinOnClick }
                 signUpOnClick={ () => setOpenSignUpModal(true) }

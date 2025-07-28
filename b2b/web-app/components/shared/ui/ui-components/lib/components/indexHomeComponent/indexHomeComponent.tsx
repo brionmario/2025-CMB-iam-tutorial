@@ -27,7 +27,7 @@ import HeroBanner from "../../../../../../../public/landing.png";
 import Image from "next/image";
 import Logo from "../../../../../../../public/logo.svg";
 
-export function IndexHomeComponent({ logoComponent, signinOnClick, signUpOnClick, isSignUpButtonVisible }: IndexHomeComponentProps) {
+export function IndexHomeComponent({ brandingPreference, signinOnClick, signUpOnClick }: IndexHomeComponentProps) {
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
     return (
@@ -37,7 +37,10 @@ export function IndexHomeComponent({ logoComponent, signinOnClick, signUpOnClick
                 <div className={styles.container}>
                     <div className={styles.headerContent}>
                         <div className={styles.logo}>
-                            <Image src={Logo} height={35} alt="logo" />
+                            { brandingPreference?.logoUrl ?
+                                <img src={brandingPreference?.logoUrl} height={35} alt="logo" />
+                                : <Image src={Logo} height={35} alt="logo" />
+                            }
                         </div>
 
                         <nav className={`${styles.nav} ${mobileMenuOpen ? styles.navOpen : ""}`}>
