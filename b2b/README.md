@@ -17,7 +17,8 @@ Worklink, Elite Solutions, Nuvora, etc., are considered organizations under the 
 
 ### Teamspace home page:
 
-<img width="800" alt="Image" src="https://github.com/user-attachments/assets/14dc1772-7566-4b60-b455-cd68c1390239" />
+<img width="1719" height="887" alt="Screenshot 2025-07-28 at 22 56 30" src="https://github.com/user-attachments/assets/f9e9a234-e59e-4c8e-b58e-9c36da2845eb" />
+
 
 ## Prerequisites
 
@@ -338,19 +339,19 @@ In the root organization, navigate to the Styles & Text section under the Brandi
 
 1. Navigate to Design Tab, expand the Images and add the following URL as the Logo URL:
 
-    - `https://cdn.statically.io/gh/wso2con/2025-BCN-iam-tutorial/main/b2b/web-app/libs/business-admin-app/ui/ui-assets/src/lib/images/teamspace_logo.png`
+    - `https://cdn.statically.io/gh/wso2con/2025-CMB-iam-tutorial/76dfa51e112ed5904df6734e390c9a52500f0ee4/b2b/web-app/public/logo.svg`
 
 2. Add the Logo Alt Text as Teamspace App Logo.
 3. Add the Favicon URL as:
 
-    - `https://cdn.statically.io/gh/wso2con/2025-BCN-iam-tutorial/main/b2b/web-app/libs/business-admin-app/ui/ui-assets/src/lib/images/teamspace_favicon.png`
+    - `https://cdn.statically.io/gh/wso2con/2025-CMB-iam-tutorial/76dfa51e112ed5904df6734e390c9a52500f0ee4/b2b/web-app/public/favicon.svg`
 
-4. Expand the Color Palette and add `#69a2f4` as the Primary Color.
+4. Expand the Color Palette and add `#2d5df3` as the Primary Color.
 
 ### Configure the first Organization
 
 1. Create a sub-organization named WorkLink from the Organizations section and switch to the sub-organization.
-2. Add a new user. You can use ‘admin@worklink.com’ as the username of the user.
+2. Add a new user. You can use ‘tom@worklink.com’ as the username of the user.
 3. You have the following options when setting up the password:
     - Invite the user to set their own password. User will get the navigation to the sample application when you have completed the customize email templates step.
     - Set a password for the user.
@@ -384,7 +385,7 @@ Visit the sample application at `http://localhost:3002`.
 1. Click on Get Started to get started.
 2. You will get a Sign In prompt. Click on the Sign In With SSO at the bottom of the menu.
 3. Provide the WorkLink as the Name of the Organization and click Submit.
-4. Use admin user credentials (`admin@worklink.com`) created to login to the application.
+4. Use admin user credentials (`tom@worklink.com`) created to login to the application.
 
 ## Consume the Teamspace Application from Organization URL
 
@@ -393,4 +394,4 @@ Visit the sample application at `http://localhost:3002/?orgId=<org-id>`. Replace
 1. Click on "Get Started".
 2. You will get a Sign In prompt and click on the Sign In With SSO at the bottom of the menu.
 3. Provide the WorkLink as the Name of the Organization and click Submit.
-4. Use admin user credentials (`admin@worklink.com`) created to login to the application.
+4. Use admin user credentials (`tom@worklink.com`) created to login to the application.
