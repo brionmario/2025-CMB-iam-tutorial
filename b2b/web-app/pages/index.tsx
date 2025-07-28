@@ -69,7 +69,7 @@ export default function Home() {
                             logoAltText: "Teamspace App Logo",
                             logoUrl: logoImage.src,
                             org: "",
-                            primaryColor: "#6672c6",
+                            primaryColor: "#2D5DF3",
                             secondaryColor: "#aed3f6"
                         };
                         personalize(defaultPersonalization);

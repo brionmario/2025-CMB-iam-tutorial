@@ -170,6 +170,7 @@
   grid-template-columns: 1fr 1fr;
   gap: 60px;
   align-items: center;
+  position: relative;
 }
 
 .heroBadge {
@@ -249,7 +250,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  z-index: 99999;
+  z-index: 1;
 }
 
 .statusDot {
@@ -782,7 +783,7 @@
 .heroBanner {
   position: absolute;
   top: 200px;
-  right: 100px;
+  right: 0;
 }
 
 @media screen and (max-width: 1120px) {

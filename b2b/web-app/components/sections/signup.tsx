@@ -5,6 +5,8 @@ import {
   Message,
   Button,
   useToaster,
+  Heading,
+  Text
 } from "rsuite";
 import AndroidIcon from "@rsuite/icons/Android";
 import { Form, Field } from "react-final-form";
@@ -55,6 +57,50 @@ export const SignUp = ({ open, onClose }) => {
     { key: "idp", label: "Plug in your IDP" },
     { key: "personalization", label: "Personalization" },
   ];
+  
+  const pricingPlans = [
+    {
+      id: "basic",
+      name: "Basic",
+      price: 0,
+      description: "Perfect for small teams getting started",
+      features: [
+        "30 min meeting duration",
+        "Community support"
+      ],
+      cta: "Get Started",
+      popular: false,
+    },
+    {
+      id: "business",
+      name: "Business",
+      price: 5,
+      period: "/month/user",
+      description: "For growing teams that need more power",
+      features: [
+        "60 min meeting duration",
+        "Personalize your app",
+        "Dedicated support",
+      ],
+      cta: "Start Free Trial",
+      popular: true,
+    },
+    {
+      id: "enterprise",
+      name: "Enterprise",
+      price: 9,
+      period: "/month/user",
+      description: "For large organizations with custom needs",
+      features: [
+        "Unlimited meeting duration",
+        "Plug in your IDP",
+        "Advanced personalization",
+        "Dedicated support"
+      ],
+      cta: "Contact Sales",
+      popular: false,
+    },
+  ]
 
   const toaster = useToaster();
 
@@ -165,26 +211,32 @@ export const SignUp = ({ open, onClose }) => {
   };
 
   return (
-    <Modal open={open} onClose={onClose} size="lg">
-      <Modal.Header style={{ marginTop: 10, textAlign: "center" }}>
-        <Modal.Title>Sign Up</Modal.Title>
+    <Modal open={open} onClose={onClose} className={styles.signUpModal} size={step === 2 ? "lg" : "sm"}>
+      <Modal.Header className={styles.signUpModalHeader}>
+        <Modal.Title>
+          <Heading>Create an Account</Heading>
+          <Text muted className={styles.signUpModalHeaderDescription}>
+            Register for an account to access exclusive features
+          </Text>
+        </Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body className={styles.signUpModalBody}>
+        {error && <Message type="error" className={styles.signUpErrors}>{error}</Message>}
         <Form
           onSubmit={onFormSubmit}
           validate={validate}
-          initialValues={{ subscription: "basic", addons: [] }}
+          initialValues={{ subscription: 'basic', addons: [] }}
           render={({ handleSubmit, values }) => (
             <FormSuite
               layout="vertical"
               onSubmit={handleSubmit}
               fluid
-              style={{ overflow: "visible" }}
+              style={{ overflow: 'visible' }}
             >
               {step === 1 && (
                 <div className={styles.formFields}>
                   <FormField name="email" label="Email" needErrorMessage={true}>
-                    <FormSuite.Control name="email" required className={styles.shortInput} />
+                    <FormSuite.Control name="email" required />
                   </FormField>
 
                   <Field name="password">
@@ -192,36 +244,47 @@ export const SignUp = ({ open, onClose }) => {
                       <FormField
                         name="password"
                         label="Password"
-                        needErrorMessage={true}
+                        needErrorMessage={false}
                       >
                         <>
                           <FormSuite.Control
                             {...input}
                             type="password"
-                            className={styles.shortInput}
                             error={meta.touched && meta.error}
                             errorMessage={meta.touched && meta.error}
                             required
                           />
                           <FormSuite.HelpText>
-                            Password must be 8-30 characters with at least one uppercase
-                            letter and digit.
+                            Password must be 8-30 characters with at least one
+                            uppercase letter and digit.
                           </FormSuite.HelpText>
                         </>
                       </FormField>
                     )}
                   </Field>
 
-                  <FormField name="firstName" label="First Name" needErrorMessage={true}>
-                    <FormSuite.Control name="firstName" required className={styles.shortInput} />
+                  <FormField
+                    name="firstName"
+                    label="First Name"
+                    needErrorMessage={true}
+                  >
+                    <FormSuite.Control name="firstName" required />
                   </FormField>
 
-                  <FormField name="lastName" label="Last Name" needErrorMessage={true}>
-                    <FormSuite.Control name="lastName" required className={styles.shortInput} />
+                  <FormField
+                    name="lastName"
+                    label="Last Name"
+                    needErrorMessage={true}
+                  >
+                    <FormSuite.Control name="lastName" required />
                   </FormField>
 
-                  <FormField name="organizationName" label="Organization Name" needErrorMessage={true}>
-                    <FormSuite.Control name="organizationName" required className={styles.shortInput} />
+                  <FormField
+                    name="organizationName"
+                    label="Organization Name"
+                    needErrorMessage={true}
+                  >
+                    <FormSuite.Control name="organizationName" required />
                   </FormField>
                 </div>
               )}
@@ -230,86 +293,93 @@ export const SignUp = ({ open, onClose }) => {
                 <div className={styles.formFields}>
                   <Field name="subscription" initialValue="basic">
                     {({ input, meta }) => (
-                      <>
-                        <table className={styles.subscriptionTable}>
-                          <thead>
-                            <tr>
-                              <th>Features</th>
-                              {subscriptionPackages.map((pkg) => (
-                                <th
-                                  key={pkg.id}
-                                  onClick={() => input.onChange(pkg.id)}
-                                  className={`${styles.clickable} ${input.value === pkg.id ? styles.selected : ""}`}
-                                  style={{ textAlign: "center", verticalAlign: "middle" }}
-                                >
-                                  {pkg.label}
-                                </th>
-                              ))}
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {subscriptionFeatures.map((feature) => (
-                              <tr key={feature.key}>
-                                <td>{feature.label}</td>
-                                {subscriptionPackages.map((pkg) => (
-                                  <td
-                                    key={pkg.id}
-                                    onClick={() => input.onChange(pkg.id)}
-                                    className={`${styles.clickable} ${input.value === pkg.id ? styles.selected : ""}`}
-                                    style={{ textAlign: "center", verticalAlign: "middle" }}
-                                  >
-                                    {feature.key === "price"
-                                      ? (
-                                          pkg.price === 0 ? (
-                                            <span className={styles.priceMain}>Free</span>
-                                          ) : (
-                                            <>
-                                              <span className={styles.priceMain}>{`$${pkg.price}`}</span><br />
-                                              <span className={styles.priceSub}>/month/user</span>
-                                            </>
-                                          )
-                                        )
-                                      : (
-                                          (pkg as any)[feature.key]
-                                        )
-                                    }
-                                  </td>
-                                ))}
-                              </tr>
+                      <div id="pricing" className={styles.pricing}>
+                        <div className={styles.container}>
+                          <div className={styles.pricingGrid}>
+                            {pricingPlans.map((plan, index) => (
+                              <div
+                                key={index}
+                                className={`${styles.pricingCard} ${
+                                  input.value === plan.id
+                                      ? styles.selected
+                                      : ''
+                                }`}
+                                onClick={() => input.onChange(plan.id)}
+                              >
+                                <div className={styles.planHeader}>
+                                  <h3 className={styles.planName}>
+                                    {plan.name}
+                                  </h3>
+                                  <p className={styles.planDescription}>
+                                    {plan.description}
+                                  </p>
+                                  <div className={styles.planPrice}>
+                                    {plan.price === 0 ? (
+                                      <span className={styles.price}>
+                                        Free
+                                      </span>
+                                    ) : (
+                                      <>
+                                        <span className={styles.price}>
+                                          {`$${plan.price}`}
+                                        </span>
+                                        {plan.period && (
+                                          <span className={styles.period}>
+                                            {plan.period}
+                                          </span>
+                                        )}
+                                      </>
+                                    )}
+                                  </div>
+                                </div>
+
+                                <ul className={styles.planFeatures}>
+                                  {plan.features.map(
+                                    (feature, featureIndex) => (
+                                      <li
+                                        key={featureIndex}
+                                        className={styles.planFeature}
+                                      >
+                                        <span className={styles.checkmark}>
+                                          ✓
+                                        </span>
+                                        {feature}
+                                      </li>
+                                    )
+                                  )}
+                                </ul>
+                              </div>
                             ))}
-                          </tbody>
-                        </table>
-                        {meta.touched && meta.error && (
-                          <div className={styles.error}>{meta.error}</div>
-                        )}
-                      </>
+                          </div>
+                        </div>
+                      </div>
                     )}
                   </Field>
                 </div>
               )}
 
               <div className={styles.buttonToolbarContainer}>
-                {step === 2 && (
-                  <Button
-                    type="button"
-                    appearance="default"
-                    size="lg"
-                    className={styles.backButton}
-                    onClick={() => setStep(1)}
-                  >
-                    Back
-                  </Button>
-                )}
                 <FormButtonToolbar
-                  submitButtonText={step === 1 ? "Next" : "Sign Up"}
+                  block
+                  submitButtonText={step === 1 ? 'Next' : 'Sign Up'}
                   submitButtonDisabled={loading}
                   onCancel={onClose}
                 />
+                {step === 2 && (
+                  <Button
+                    block
+                    type="button"
+                    appearance="link"
+                    size="lg"
+                    onClick={() => setStep(1)}
+                  >
+                    Go Back
+                  </Button>
+                )}
               </div>
               {loading && (
                 <Loader size="sm" backdrop content="Signing you up!" vertical />
               )}
-              {error && <Message type="error">{error}</Message>}
             </FormSuite>
           )}
         />
