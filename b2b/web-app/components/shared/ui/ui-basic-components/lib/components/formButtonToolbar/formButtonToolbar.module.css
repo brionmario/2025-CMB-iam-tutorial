@@ -17,7 +17,6 @@
  */
 
  .addUserButton{
-    height: 50px;
     font-size: 18px;
     border-radius: 22px;
     box-shadow: none;
@@ -32,7 +31,6 @@
 }
 
 .cancelButton {
-    height: 50px;
     font-size: 1rem;
     margin-bottom: 10px;
 }

@@ -16,6 +16,16 @@ const nextConfig = {
       strictMath: true
     }
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'cdn.statically.io',
+        port: '',
+        pathname: '',
+      },
+    ],
+  },
   webpack(config) {
     config.resolve.alias = { ...config.resolve.alias, ...alias };
     return config;
